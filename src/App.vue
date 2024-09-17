@@ -1,15 +1,45 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <app-header />
+      <router-view />
+    <app-footer />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import {createRouter, createWebHistory} from 'vue-router'
+import AppHeader from './components/AppHeader.vue'
+import AppFooter from './components/AppFooter.vue'
+import AppHome from './pages/AppHome.vue'
+import AppAbout from './pages/AppAbout.vue'
+import AppContact from './pages/AppContact.vue'
+
+const router = createRouter({
+  history: createWebHistory(),
+  routes: [
+    {
+      path: '/',
+      component: AppHome
+    },
+    {
+      path: '/about',
+      component: AppAbout
+    },
+    {
+      path: '/contact',
+      component: AppContact
+    }
+  ]
+})
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    AppHeader,
+    AppFooter
+  },
+  setup() {
+    return {
+      router
+    }
   }
 }
 </script>
@@ -21,6 +51,9 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 </style>
